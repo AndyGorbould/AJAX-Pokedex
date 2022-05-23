@@ -93,7 +93,7 @@ const fetchPokemons = async () => {
 
 
     // this needs to be user-input of ID# or monster
-    let i = 199; {
+    let i = 160; {
         await getPokemon(i);
     }
 };
@@ -142,7 +142,7 @@ function createPokemonCard(pokemon) {
 
 
             
-            <img src="${img}" alt="${name}">
+            <img class="sprite-front" src="${img}" alt="${name}">
             </br>
 
 

@@ -1,0 +1,10 @@
+.sprite-front {
+    scale: 1;
+    transition: 750ms;
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+}
+
+.sprite-front:hover {
+    transform: scale(4) translateX(100px);    
+}
