@@ -82,7 +82,7 @@ const colors = {
     normal: '#F5F5F5'
 };
 
-// remove color key
+// remove color key?
 const main_types = Object.keys(colors);
 // const main_moves = Object.keys(colors);
 
@@ -92,7 +92,7 @@ const fetchPokemons = async () => {
     // }
 
 
-    // this needs to be user-input
+    // this needs to be user-input of ID# or monster
     let i = 199; {
         await getPokemon(i);
     }
@@ -108,6 +108,10 @@ const getPokemon = async id => {
 function createPokemonCard(pokemon) {
     const pokemonEl = document.createElement('div');
     pokemonEl.classList.add('pokemon');
+
+
+    // img
+    const img = pokemon.sprites.front_default;
 
     // moves -- what a long-winded approach!! this needs shortening.... forEach move in moves??
     // const move = pokemon.moves[0].move.name[0].toUpperCase() + pokemon.moves[0].move.name.slice(1);
@@ -135,8 +139,13 @@ function createPokemonCard(pokemon) {
             .toString()
             .padStart(3, '0')}</span>
             <h3 class="name">${name}</h3>
+
+
             
-            <h2>this looks terrible & over-complicated!</h2>
+            <img src="${img}" alt="${name}">
+            </br>
+
+
             <small class="type">Moves: <span>${moveA}</span></br></small>
             <small class="type">Moves: <span>${moveB}</span></br></small>
             <small class="type">Moves: <span>${moveC}</span></br></small>
