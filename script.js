@@ -78,7 +78,7 @@ function userNumberInputFunc() {
 
     // number (user)
     let userNumbInputVal = document.getElementById("userNumbInput").value;
-    
+
 
     let i = userNumbInputVal;
     getPokemon(i);
@@ -114,8 +114,6 @@ const fetchPokemons = async () => {
     // for (let i = 1; i <= pokemons_number; i++) {
     // 	await getPokemon(i);
     // }
-
-
 
     {
         await getPokemon(i);
@@ -188,3 +186,47 @@ function createPokemonCard(pokemon) {
 
 fetchPokemons();
 
+
+
+// 
+// 
+// 
+// list
+// https://pokeapi.co/api/v2/pokemon/?limit=50&offset=50
+
+const poke_list = document.getElementById('list');
+
+
+const fetchList = async () => {
+    await getPokemonList(i);
+};
+
+const getPokemonList = async id => {
+    const url = `https://pokeapi.co/api/v2/pokemon/?limit=100&offset=00}`;
+    const res = await fetch(url);
+    const pokemonList = await res.json();
+    createPokemonList(pokemonList);
+};
+
+
+
+
+function createPokemonList(pokemonList) {
+    const pokemonElementList = document.createElement('option');
+    pokemonElementList.classList.add('pokemonList');
+
+
+    // name
+    const name = pokemonList.name[0].toUpperCase() + pokemonList.name.slice(1);
+    // id
+    const pokemonListID = pokemonList.id;
+
+    // this innerHTML thing needs to change - create element/li for each
+    const pokeInnerHTML = `
+                <option value="${pokemonList.id}">${pokemonList.name}</option>
+        `;
+
+    pokemonElementList.innerHTML = pokeInnerHTML;
+
+    poke_list.appendChild(pokemonElementList);
+};
