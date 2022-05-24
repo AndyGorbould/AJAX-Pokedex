@@ -63,6 +63,30 @@
 
 
 
+
+
+
+// input
+// button
+var run = document.getElementById("btnNumbInput").addEventListener("click", userNumberInputFunc);
+
+
+// init "i"
+// let i = 130;
+
+function userNumberInputFunc() {
+
+    // number (user)
+    let userNumbInputVal = document.getElementById("userNumbInput").value;
+    
+
+    let i = userNumbInputVal;
+    getPokemon(i);
+    console.log(i);
+};
+
+
+
 const poke_container = document.getElementById('nameDisplay');
 const pokemons_number = 20;
 const colors = {
@@ -92,8 +116,8 @@ const fetchPokemons = async () => {
     // }
 
 
-    // this needs to be user-input of ID# or monster
-    let i = 160; {
+
+    {
         await getPokemon(i);
     }
 };
