@@ -10,12 +10,12 @@ function userNumberInputFunc() {
 
     let i = userNumbInputVal;
     getPokemon(i);
-    console.log(i);
+    // console.log(i);
 };
 
 
 
-const poke_container = document.getElementById('nameDisplay');
+const selectedDisplay = document.getElementById('nameDisplay');
 const pokemons_number = 20;
 const colors = {
     fire: '#FDDFDF',
@@ -57,22 +57,40 @@ const getPokemon = async id => {
     const evoChainURL = (speciesTree.evolution_chain.url);    // https://pokeapi.co/api/v2/evolution-chain/2/
     const resultEvoChain = await fetch(evoChainURL);
     const evoChainEnd = await resultEvoChain.json();
-    const helpMePlease = evoChainEnd.chain.evolves_to;
-    const helpMePleaseEvTo = helpMePlease.evolves_to.species;
-    // const helpMePleaseEvToSpecies = helpMePleaseEvTo.name;
+
     
+    let pokeEvoList = evoListAll(evoChainEnd);
+    console.log(pokeEvoList)
     
-    /// testing
-    // console.log(evoChainURL);
-    console.log(helpMePleaseEvTo);
 };
+
+function evoListAll(evoChainEnd) {
+// push names to array
+let pokeEvoList = [];
+
+// push first       ////// thank to Lucas for the expert advice!!
+if (evoChainEnd.chain.evolves_to.length === 0) {
+    pokeEvoList.push(evoChainEnd.chain.species.name);
+} else {
+    pokeEvoList.push(evoChainEnd.chain.species.name);
+    // check if 2nd
+    if (evoChainEnd.chain.evolves_to[0] !== undefined) {
+        pokeEvoList.push(evoChainEnd.chain.evolves_to[0].species.name);
+    }
+    // check if 3rd
+    if (evoChainEnd.chain.evolves_to[0].evolves_to[0] !== undefined) {
+        pokeEvoList.push(evoChainEnd.chain.evolves_to[0].evolves_to[0].species.name);
+    }
+}
+
+return pokeEvoList;
+};
+
+
 
 function createPokemonCard(pokemon) {
     const pokemonEl = document.createElement('div');
     pokemonEl.classList.add('pokemon');
-
-    
-
 
     // img
     const img = pokemon.sprites.front_default;
@@ -90,7 +108,6 @@ function createPokemonCard(pokemon) {
 
     // name
     const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-
 
     pokemonEl.style.backgroundColor = color;
 
@@ -117,14 +134,15 @@ function createPokemonCard(pokemon) {
 
     pokemonEl.innerHTML = pokeInnerHTML;
 
-    poke_container.appendChild(pokemonEl);
+    selectedDisplay.appendChild(pokemonEl);
 
-
-
-
-    
 }
 
 fetchPokemons();
 
 
+
+
+
+
+//////// "moves"  needs to follow same pattern as the evoChain print thing
