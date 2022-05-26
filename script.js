@@ -38,21 +38,19 @@ const colors = {
 const main_types = Object.keys(colors);
 // const main_moves = Object.keys(colors);
 
+const fetchPokemons = async () => {
+    {
+        await getPokemon(i);
+    }
+};
 
 
+//////// restructure into 3 funcs
 const getPokemon = async id => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
     const pokemon = await res.json();
     createPokemonCard(pokemon);
-
-
-
-
-
-
-
-
     // species url
     const speciesURL = (pokemon.species.url);       // https://pokeapi.co/api/v2/pokemon-species/4/
     const reultSpecies = await fetch(speciesURL);
@@ -62,58 +60,60 @@ const getPokemon = async id => {
     const resultEvoChain = await fetch(evoChainURL);
     const evoChainEnd = await resultEvoChain.json();
 
-
-
-    // EVOS
+    
     let pokeEvoList = evoListAll(evoChainEnd);
-    for (let index = 0; index < pokeEvoList.length; index++) {
-        async function evoFetch(index) {
-            const url = `https://pokeapi.co/api/v2/pokemon/${pokeEvoList[index]}`;
-            const res = await fetch(url);
-            const pokemonEvo = await res.json();
-        };
-
-
-  
-
-
-
-    }
-
+    console.log(pokeEvoList);
+    createEvolutionCard(pokeEvoList)
+    
 };
-function displayEvo(pokemonEvo) {
-    const img = document.createElement("img");
-    const imgSRC = pokemonEvo[index].sprites.front_default;
-    document.body.appendChild(img);
 
-    console.log(imgSRC);
 
+// list evo chain
+function evoListAll(evoChainEnd) {
+// push names to array
+let pokeEvoList = [];
+
+// push first       ////// thank to Lucas for the expert advice!!
+if (evoChainEnd.chain.evolves_to.length === 0) {
+    pokeEvoList.push(evoChainEnd.chain.species.name);
+} else {
+    pokeEvoList.push(evoChainEnd.chain.species.name);
+    // check if 2nd
+    if (evoChainEnd.chain.evolves_to[0] !== undefined) {
+        pokeEvoList.push(evoChainEnd.chain.evolves_to[0].species.name);
+    }
+    // check if 3rd
+    if (evoChainEnd.chain.evolves_to[0].evolves_to[0] !== undefined) {
+        pokeEvoList.push(evoChainEnd.chain.evolves_to[0].evolves_to[0].species.name);
+    }
 }
 
-function evoListAll(evoChainEnd) {
-    // push names to array
-    let pokeEvoList = [];
-
-    // push first       ////// thank to Lucas for the expert advice!!
-    if (evoChainEnd.chain.evolves_to.length === 0) {
-        pokeEvoList.push(evoChainEnd.chain.species.name);
-    } else {
-        pokeEvoList.push(evoChainEnd.chain.species.name);
-        // check if 2nd
-        if (evoChainEnd.chain.evolves_to[0] !== undefined) {
-            pokeEvoList.push(evoChainEnd.chain.evolves_to[0].species.name);
-        }
-        // check if 3rd
-        if (evoChainEnd.chain.evolves_to[0].evolves_to[0] !== undefined) {
-            pokeEvoList.push(evoChainEnd.chain.evolves_to[0].evolves_to[0].species.name);
-        }
-    }
-
-    return pokeEvoList;
+return pokeEvoList;
 };
+/////////////
+
+function createEvolutionCard(pokeEvoList) {
+    const evoElement = document.createElement('p');
+    evoElement.classList.add('pokeEvoList');
 
 
+    const evoInnerHTML = `   
+    <h2>Stage 1: ${pokeEvoList[0]}</br></h2>
+    <h2>Stage 2: ${pokeEvoList[1]}</br></h2>
+    <h2>Stage 3: ${pokeEvoList[2]}</br></h2>
 
+    `   
+        // document.createElement('h2').innerText = `${pokeEvoList[0]}`;
+
+
+    evoElement.innerHTML = evoInnerHTML;
+
+    selectedDisplay.appendChild(evoElement);
+    
+}
+
+
+//////////
 function createPokemonCard(pokemon) {
     const pokemonEl = document.createElement('div');
     pokemonEl.classList.add('pokemon');
@@ -164,7 +164,13 @@ function createPokemonCard(pokemon) {
 
 }
 
-displayEvo(pokemonEvo);
+fetchPokemons();
+
+
+
+
 
 
 //////// "moves"  needs to follow same pattern as the evoChain print thing
+
+
