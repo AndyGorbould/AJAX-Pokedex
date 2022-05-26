@@ -24,3 +24,6 @@ change offset +50 on a "next" button??
 
 <option value="abc">abc</option>
 ^^ change value & innerText
+
+/////////////////
+I tried to add some CSS styling to make it not look >>BAD<< & this has absolutely messed up everything on my github & vs code. I can't push anything, I can't get any merges to work & I don't even know what I'm working on anymore
