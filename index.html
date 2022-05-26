@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,34 +8,38 @@
     <title>AJAX Pokédex</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <div class="everything">
+
+        <img class="logo" src="/pokemon_logo.svg" alt="Pokémon">
 
 
-    <!-- user input text boxes -->
-    <input id="userNumbInput" type="text" maxlength="12" placeholder="NAME or ID (1-898)">
-    <button id="btnNumbInput">Select</button>
+        <!-- user input text boxes -->
+        <input class="input" id="userNumbInput" type="text" maxlength="12" placeholder="NAME or ID (1-898)">
+        <button class="input" id="btnNumbInput">Select</button>
 
 
-    <!-- display name -->
-    <div id="nameDisplay">
-        <p>they should go here:</p>
-        <p ></p>
+        <!-- display name -->
+        <div clas="info" id="nameDisplay">
+
+        </div>
+
+
+
+
+        <div class="info">
+            <p>This has been heavily modified from https://www.youtube.com/watch?v=XL68br6JyYs </p>
+        </div>
+
+        <!-- test button -->
+        <!-- <button type="button" onclick="loadDoc()">Change Content</button> -->
+
 
     </div>
-
-
-
-
-    <div>
-        <p>This has been modified from https://www.youtube.com/watch?v=XL68br6JyYs </p>
-    </div>
-
-    <!-- test button -->
-    <!-- <button type="button" onclick="loadDoc()">Change Content</button> -->
-
-    
 
     <!-- JS -->
     <script src="script.js"></script>
 </body>
+
 </html>
