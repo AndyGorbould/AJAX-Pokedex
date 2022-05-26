@@ -7,13 +7,10 @@ function userNumberInputFunc() {
     // number (user)
     let userNumbInputVal = document.getElementById("userNumbInput").value;
 
-
     let i = userNumbInputVal;
     getPokemon(i);
     // console.log(i);
 };
-
-
 
 const selectedDisplay = document.getElementById('nameDisplay');
 const pokemons_number = 20;
@@ -67,7 +64,6 @@ const getPokemon = async id => {
     
 };
 
-
 // list evo chain
 function evoListAll(evoChainEnd) {
 // push names to array
@@ -102,7 +98,6 @@ function createEvolutionCard(pokeEvoList) {
     const evoElement = document.createElement('p');
     evoElement.classList.add('pokeEvoList');
 
-
     const evoInnerHTML = `   
     </br></br></br></br></br>
     <h2>Evolutions</h2>
@@ -111,10 +106,6 @@ function createEvolutionCard(pokeEvoList) {
     <h3><a href="https://pokeapi.co/api/v2/pokemon/${pokeEvoList[2]}">Stage 3: ${pokeEvoList[2]}</br></h3>
 
     `   
-    // links only go to json...
-        // document.createElement('h2').innerText = `${pokeEvoList[0]}`;
-
-
     evoElement.innerHTML = evoInnerHTML;
 
     selectedDisplay.appendChild(evoElement);
@@ -157,13 +148,8 @@ function createPokemonCard(pokemon) {
             <img class="sprite-front" src="${img}" alt="${name}">
             </br>
 
-            <small class="type">Moves: <span>${moveA}</span></br></small>
-            <small class="type"><span>${moveB}</span></br></small>
-            <small class="type"><span>${moveC}</span></br></small>
-            <small class="type"><span>${moveD}</span></small>
+            <p class="type">Moves: <span>${moveA}, ${moveB}, ${moveC}, ${moveD}</br></p>
 
-            </br>
-            <small class="type">Type: <span>${type}</span></small>
         </div>
     `;
 
@@ -177,9 +163,6 @@ fetchPokemons();
 
 
 
-
-
-
 //////// "moves"  needs to follow same pattern as the evoChain print thing
 ////// 
-
+/////
