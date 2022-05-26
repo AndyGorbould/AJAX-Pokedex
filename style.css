@@ -1,3 +1,23 @@
+body {
+    background-color: rgb(202, 0, 0);
+    display: flex;
+}
+
+.input {
+    display: flex;
+    margin: auto;
+    padding: 8px;
+    /* background-color: yellow; */
+}
+
+.info {
+    display: flex;
+    margin: auto;
+    padding: 8px;
+    /* background-color: yellow; */
+    vertical-align: bottom;
+}
+
 .sprite-front {
     scale: 1;
     transition: 750ms;
@@ -6,5 +26,13 @@
 }
 
 .sprite-front:hover {
-    transform: scale(4) translateX(100px);    
+    transform: scale(4);    
+}
+
+.logo {
+    display: block;
+    width: 80%;
+    margin-top: 0%;
+    margin: auto;
+    
 }

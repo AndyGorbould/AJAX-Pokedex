@@ -72,25 +72,31 @@ const getPokemon = async id => {
 function evoListAll(evoChainEnd) {
 // push names to array
 let pokeEvoList = [];
+let pokeEvoListID = [];
 
 // push first       ////// thank to Lucas for the expert advice!!
 if (evoChainEnd.chain.evolves_to.length === 0) {
     pokeEvoList.push(evoChainEnd.chain.species.name);
+    pokeEvoListID.push(evoChainEnd.chain.id);
 } else {
     pokeEvoList.push(evoChainEnd.chain.species.name);
+    pokeEvoListID.push(evoChainEnd.chain.species.url);
     // check if 2nd
     if (evoChainEnd.chain.evolves_to[0] !== undefined) {
         pokeEvoList.push(evoChainEnd.chain.evolves_to[0].species.name);
+        pokeEvoListID.push(evoChainEnd.chain.evolves_to[0].species.url);
     }
     // check if 3rd
     if (evoChainEnd.chain.evolves_to[0].evolves_to[0] !== undefined) {
         pokeEvoList.push(evoChainEnd.chain.evolves_to[0].evolves_to[0].species.name);
+        pokeEvoListID.push(evoChainEnd.chain.evolves_to[0].evolves_to[0].species.url);
     }
 }
 
 return pokeEvoList;
 };
 /////////////
+console.log(pokeEvoListID);
 
 function createEvolutionCard(pokeEvoList) {
     const evoElement = document.createElement('p');
@@ -98,11 +104,14 @@ function createEvolutionCard(pokeEvoList) {
 
 
     const evoInnerHTML = `   
-    <h2>Stage 1: ${pokeEvoList[0]}</br></h2>
-    <h2>Stage 2: ${pokeEvoList[1]}</br></h2>
-    <h2>Stage 3: ${pokeEvoList[2]}</br></h2>
+    </br></br></br></br></br>
+    <h2>Evolutions</h2>
+    <h3><a href="https://pokeapi.co/api/v2/pokemon/${pokeEvoList[0]}">Stage 1: ${pokeEvoList[0]}</br></h3>
+    <h3><a href="https://pokeapi.co/api/v2/pokemon/${pokeEvoList[1]}">Stage 2: ${pokeEvoList[1]}</br></h3>
+    <h3><a href="https://pokeapi.co/api/v2/pokemon/${pokeEvoList[2]}">Stage 3: ${pokeEvoList[2]}</br></h3>
 
     `   
+    // links only go to json...
         // document.createElement('h2').innerText = `${pokeEvoList[0]}`;
 
 
@@ -149,9 +158,9 @@ function createPokemonCard(pokemon) {
             </br>
 
             <small class="type">Moves: <span>${moveA}</span></br></small>
-            <small class="type">Moves: <span>${moveB}</span></br></small>
-            <small class="type">Moves: <span>${moveC}</span></br></small>
-            <small class="type">Moves: <span>${moveD}</span></br></small>
+            <small class="type"><span>${moveB}</span></br></small>
+            <small class="type"><span>${moveC}</span></br></small>
+            <small class="type"><span>${moveD}</span></small>
 
             </br>
             <small class="type">Type: <span>${type}</span></small>
@@ -172,5 +181,5 @@ fetchPokemons();
 
 
 //////// "moves"  needs to follow same pattern as the evoChain print thing
-
+////// 
 
